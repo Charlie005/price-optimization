@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 import streamlit as st
 
 df = pd.read_csv("https://raw.githubusercontent.com/Charlie005/price-optimization/master/priceOptimize.csv")
-df3  = pd.read_csv("https://raw.githubusercontent.com/Charlie005/price-optimization/master/coefs.csv")
+#df3  = pd.read_csv("https://raw.githubusercontent.com/Charlie005/price-optimization/master/coefs.csv")
 
 names = ['< PRODUCT >']
 categories = ['< CATEGORY >'] + sorted(df['MC'].unique().tolist())
@@ -20,50 +20,43 @@ brands = ['< BRAND >']
 # cName = df['NAME'].value_counts()
 zones = ['< ZONE >']
 
-def load_data():   
-    global df
-    global df3
-    global categories, brands, names
-    df = pd.read_csv("C:/Data/priceOptimize.csv")
-    df.dropna(inplace=True)
+global df
+global df3
+global categories, brands, names
+df = pd.read_csv("C:/Data/priceOptimize.csv")
+df.dropna(inplace=True)
 
-    df = df.loc[df['Sales_at_Cost'] >= 0]
-    df = df.loc[df['NSU'] >= 0]
-    df = df.loc[df['MRP'] >= 0]
-    df = df.loc[df['SP'] >= 0]
+df = df.loc[df['Sales_at_Cost'] >= 0]
+df = df.loc[df['NSU'] >= 0]
+df = df.loc[df['MRP'] >= 0]
+df = df.loc[df['SP'] >= 0]
 
 
-    # 16 nan rows deleted
-    # 23 rows where Sales_at_Cost < 0
-    # remaining 2 rows where NSU < 0
-    # remaining 1 row where MRP < 0 
-    # remaining 6 rows where SP < 0
-
-    df['UC'] = df['Sales_at_Cost']/df['NSU']
-    df['UGST'] = df['GST']/df['NSU']
-    names = ['< PRODUCT >'] + sorted(df['NAME'].unique().tolist())
-    categories = ['< CATEGORY >'] + sorted(df['MC'].unique().tolist())
-    brands = ['< BRAND >'] + sorted(df['Brand'].unique().tolist())
-    #cName = df['NAME'].value_counts()
-    zones = ['< ZONE >','NORTH','SOUTH','EAST','WEST']
-    dfdict = {}
-    for i in names:
-        df1 = df.loc[df['NAME'] == i]
-        dfdict[i] = df1
-      
-    df3 = pd.DataFrame(columns=['NAME','ZONE','Intercept','SP_Coef','UC_Coef','UC','UGST'])    
-    for k in dfdict:
-        zgroups = dfdict[k].groupby('ZONE')
-        zones = zgroups.groups.keys()
-        for i in zones:
-            zval = zgroups.get_group(i)
-            model = ols("NSU ~ SP + UC", data = zval).fit()
-            p = model.params
-            cost = dfdict[k].UC.mean()
-            gst = dfdict[k].UGST.mean()
-            temp = {'NAME':k,'ZONE':i, 'Intercept':p[0], 'SP_Coef':p[1], 'UC_Coef':p[2], 'UC':cost, 'UGST':gst}
-            df3 = df3.append(temp,ignore_index=True)
-    df3.to_csv('coefs.csv')
+df['UC'] = df['Sales_at_Cost']/df['NSU']
+df['UGST'] = df['GST']/df['NSU']
+names = ['< PRODUCT >'] + sorted(df['NAME'].unique().tolist())
+categories = ['< CATEGORY >'] + sorted(df['MC'].unique().tolist())
+brands = ['< BRAND >'] + sorted(df['Brand'].unique().tolist())
+#cName = df['NAME'].value_counts()
+zones = ['< ZONE >','NORTH','SOUTH','EAST','WEST']
+dfdict = {}
+for i in names:
+    df1 = df.loc[df['NAME'] == i]
+    dfdict[i] = df1
+  
+df3 = pd.DataFrame(columns=['NAME','ZONE','Intercept','SP_Coef','UC_Coef','UC','UGST'])    
+for k in dfdict:
+    zgroups = dfdict[k].groupby('ZONE')
+    zones = zgroups.groups.keys()
+    for i in zones:
+        zval = zgroups.get_group(i)
+        model = ols("NSU ~ SP + UC", data = zval).fit()
+        p = model.params
+        cost = dfdict[k].UC.mean()
+        gst = dfdict[k].UGST.mean()
+        temp = {'NAME':k,'ZONE':i, 'Intercept':p[0], 'SP_Coef':p[1], 'UC_Coef':p[2], 'UC':cost, 'UGST':gst}
+        df3 = df3.append(temp,ignore_index=True)
+#df3.to_csv('coefs.csv')
 
 
 def getprice():
@@ -160,11 +153,11 @@ gp = st.button('Get Price')
 if(gp):
     if((category != '< CATEGORY >' ) and (brand != '< BRAND >') and (product != '< PRODUCT >') and (zone != '< ZONE >')):
         getprice()
-with st.sidebar:
-    ld = st.button('Load Data')
+# with st.sidebar:
+#     ld = st.button('Load Data')
 
-if(ld):
-    with st.spinner('Loading Data...'):
-        load_data()
-        df3  = pd.read_csv('C:\\Users\\amalj\\Desktop\\360\\coefs.csv')         
-    st.success('Done!')
+# if(ld):
+#     with st.spinner('Loading Data...'):
+#         load_data()
+#         df3  = pd.read_csv('C:\\Users\\amalj\\Desktop\\360\\coefs.csv')         
+#     st.success('Done!')
