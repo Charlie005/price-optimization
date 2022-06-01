@@ -11,8 +11,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import streamlit as st
 
-df = pd.read_csv("C:/Data/priceOptimize.csv")
-df3  = pd.read_csv('C:\\Users\\amalj\\Desktop\\360\\coefs.csv')
+df = pd.read_csv("https://raw.githubusercontent.com/Charlie005/price-optimization/master/priceOptimize.csv")
+df3  = pd.read_csv("https://raw.githubusercontent.com/Charlie005/price-optimization/master/coefs.csv")
 
 names = ['< PRODUCT >']
 categories = ['< CATEGORY >'] + sorted(df['MC'].unique().tolist())
