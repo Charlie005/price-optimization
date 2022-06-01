@@ -3,3 +3,4 @@ statsmodels==0.13.2
 numpy==1.21.5
 matplotlib==3.5.1
 streamlit==1.9.0
+protobuf~=3.19.0
