@@ -1,1 +1,1 @@
-web: streamlit run app.py --bind $PORT
+web: streamlit run app.py --server.port 8080
