@@ -20,9 +20,6 @@ brands = ['< BRAND >']
 # cName = df['NAME'].value_counts()
 zones = ['< ZONE >']
 
-global df
-global df3
-global categories, brands, names
 df = pd.read_csv("C:/Data/priceOptimize.csv")
 df.dropna(inplace=True)
 
@@ -47,8 +44,8 @@ for i in names:
 df3 = pd.DataFrame(columns=['NAME','ZONE','Intercept','SP_Coef','UC_Coef','UC','UGST'])    
 for k in dfdict:
     zgroups = dfdict[k].groupby('ZONE')
-    zones = zgroups.groups.keys()
-    for i in zones:
+    zonevals = zgroups.groups.keys()
+    for i in zonevals:
         zval = zgroups.get_group(i)
         model = ols("NSU ~ SP + UC", data = zval).fit()
         p = model.params
