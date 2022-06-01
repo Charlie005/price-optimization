@@ -20,7 +20,6 @@ brands = ['< BRAND >']
 # cName = df['NAME'].value_counts()
 zones = ['< ZONE >']
 
-df = pd.read_csv("C:/Data/priceOptimize.csv")
 df.dropna(inplace=True)
 
 df = df.loc[df['Sales_at_Cost'] >= 0]
