@@ -7,7 +7,7 @@ import streamlit as st
 #Page Config
 st.set_page_config(page_title='Retail Price Optimisation',layout="wide")
 
-df3  = pd.read_csv("C:\\Users\\amalj\\Desktop\\360\\Project\\Products.csv")
+df3  = pd.read_csv("https://raw.githubusercontent.com/Charlie005/price-optimization/master/Products.csv")
 
 names = ['< PRODUCT >']
 categories = ['< CATEGORY >'] + sorted(df3['MC'].unique().tolist())
