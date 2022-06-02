@@ -10,7 +10,10 @@ DATABASE_URL = os.environ['DATABASE_URL']
 #Page Config
 st.set_page_config(page_title='Retail Price Optimisation',layout="wide")
 
-df3  = pd.read_csv("https://raw.githubusercontent.com/Charlie005/price-optimization/master/Products.csv")
+#For whole data
+#df3  = pd.read_csv("https://raw.githubusercontent.com/Charlie005/price-optimization/master/Products.csv")
+#For small data
+df3 = pd.read_csv("https://raw.githubusercontent.com/Charlie005/price-optimization/master/smallProducts.csv")
 
 names = ['< PRODUCT >']
 categories = ['< CATEGORY >'] + sorted(df3['MC'].unique().tolist())
