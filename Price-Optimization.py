@@ -148,7 +148,7 @@ if(product != '< PRODUCT >'):
 zone = col4.selectbox('Select Zone',zones,index = zones.index('< ZONE >'))
 if(zone != '< ZONE >'):
     val = df.loc[(df['NAME'] == product) & (df['ZONE'] == zone)]
-    pricerange = val['Price_Range']
+    pricerange = val['Price_Range'].iloc[0]
     mrpr = 'Previous MRP Range : ' + pricerange
     st.write(mrpr)
 mrp = st.number_input("Enter MRP")
