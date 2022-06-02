@@ -7,3 +7,5 @@ About the different files:
 3. Procfile is the instruction file for Heroku
 4. priceOptimize.csv is the data file containing whole transaction data
 5. requirements.txt contains all packages required for the running of the code
+
+P.S : The training part of the model where the coefs.csv file is created is left commented considering the time taken for execution while deploying on Heroku
