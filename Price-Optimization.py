@@ -113,7 +113,7 @@ def getprice():
     # taking only positive NSU's 
     profit2 = profit.loc[(profit['NSU']>0) & (profit['Revenue']>0)]
     if len(profit2) == 0:
-        print('Error: Given MRP cannot create positive Revenue!')
+        st.write('Error: Given MRP cannot create positive Revenue!')
     else:
         # to find the Price at which maximum units are sold AND max revenue is generated
         profit2['Revenue x NSU'] = profit2['Revenue'] * profit2['NSU']
