@@ -7,3 +7,4 @@ About the different files:
 3. Procfile is the instruction file for Heroku
 4. priceOptimize.csv is the data file containing whole transaction data
 5. requirements.txt contains all packages required for the running of the code
+6. smallProducts.csv and smalldata.csv contain data for 248 select products ( Since Heroku only supports 10,000 rows of data)
