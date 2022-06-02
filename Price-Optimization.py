@@ -3,6 +3,9 @@ import pandas as pd
 from statsmodels.formula.api import ols
 import numpy as np
 import streamlit as st
+import os
+
+DATABASE_URL = os.environ['DATABASE_URL']
 
 #Page Config
 st.set_page_config(page_title='Retail Price Optimisation',layout="wide")
@@ -51,7 +54,7 @@ gp = st.button('Get Price')
 def getprice():
     
     #establishing the connection
-    conn = psycopg2.connect(database="postgres", user='postgres', password='ajj@123', host='localhost')
+    conn = psycopg2.connect(DATABASE_URL)
     
     #Creating a cursor object using the cursor() method
     cursor = conn.cursor()
